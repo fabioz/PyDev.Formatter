@@ -86,5 +86,12 @@ Releasing
 ==========
 
 - Update versions on setup.py and version.py
+- git tag version
+- git push --tags (travis should build and deploy)
+
+Local release
+===============
+
+- Update versions on setup.py and version.py
 - python setup.py sdist bdist_wheel
 - python -m twine upload dist/*
