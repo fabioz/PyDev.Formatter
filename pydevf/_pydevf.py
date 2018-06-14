@@ -27,9 +27,6 @@ exit_daemon()
 
 from __future__ import unicode_literals
 
-import click
-click.disable_unicode_literals_warning = True
-
 import os.path
 import re
 import sys
@@ -38,7 +35,13 @@ import threading
 import traceback
 import weakref
 
+import click
+
 from .version import __version__
+
+click.disable_unicode_literals_warning = True
+
+
 
 
 _MUTEX_NAME = 'pydev_code_formatter'
@@ -574,7 +577,10 @@ def _read(stream, decode=True):
 
         size = int(headers['Content-Length'])
         if size == 0:
-            body = ''
+            if decode:
+                body = ''
+            else:
+                body = b''
         else:
             # Get the actual contents to be formatted.
             body = stream.read(size)
@@ -948,13 +954,16 @@ def main(
                             if include_file(os.path.basename(filename)):
                                 format_files.append(os.path.join(root, filename))
 
+                        new_dirs = []
                         for directory in dirs:
-                            new_dirs = []
                             if not exclude_directory(os.path.basename(directory)):
                                 new_dirs.append(directory)
-                            dirs[:] = new_dirs
+                        dirs[:] = new_dirs[:]
 
-            for entry in format_files:
+            total = len(format_files)
+            for i, entry in enumerate(format_files):
+                if verbose:
+                    out('Format file: %s (%s of %s)' % (entry, i + 1, total))
                 with open(entry, 'rb') as stream:
                     contents = stream.read()
 
