@@ -23,7 +23,8 @@ Code formatter is created by extracting the engine for code formatting provided 
 PyDev: http://www.pydev.org).
 
 The PyDev Formatter is a conservative python code formatter and will try to keep the 
-structure of the code as much as possible while fixing many common issues such as:
+structure of the code as close as possible to the original sources, while fixing many
+common issues such as:
 
 - Keep a space after commas
 - Trim spaces inside parenthesis
@@ -36,20 +37,37 @@ structure of the code as much as possible while fixing many common issues such a
 
 And will not try to break statements to fit any pre-specified line length (as gofmt).
 
+Command line
+=============
+
+To use the formatter use:
+ 
+`python -m pydevf <filename_or_directory>`
+
+`python -m pydevf -h` may be used to see the help for additional parameters.
+
+Installing
+============
+
+Requisites
+-----------
+
+- java 8+ (so, make sure java is installed and in your PATH)
+- python 2.7 or 3.4 onwards
+- click 6+
+
+Install with pip
+-----------------
+
+`pip install pydevf` should be used to install the PyDev Formatter.
+
 Dealing with big lines
 ========================
 
 Note that in PyDev there are tools to help on those manual cases. i.e.:
 
-Wrap docstrings/comments with Ctrl+2, W -- See: http://pydev.blogspot.com/2015/04/wrapping-docstringscomments-in-pydev.html.
-Wrap/unwrap lists/calls with Ctrl+1, Wrap expression/unwrap expression (used with cursor inside the list/call).
-
-Requisites
-============
-
-- java 8+ (so, make sure java is installed and in your PATH)
-- python 2.7 or 3.4 onwards
-- click 6+
+Wrap docstrings/comments with `Ctrl+2, W` -- See: http://pydev.blogspot.com/2015/04/wrapping-docstringscomments-in-pydev.html.
+Wrap/unwrap lists/calls with `Ctrl+1`, `Wrap expression`/`unwrap expression` (used with cursor inside the list/call).
 
 Daemon mode
 ============
