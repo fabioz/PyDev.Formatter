@@ -21,7 +21,7 @@ format_code_using_daemon(code_to_format)
 format_code_using_daemon(code_to_format)
 
 # Optional as the daemon is meant to be kept alive for invocations in different
-# procesess.
+# processess.
 exit_daemon()
 '''
 
@@ -38,9 +38,8 @@ import threading
 import traceback
 import weakref
 
-__author__ = """Fabio Zadrozny"""
-__email__ = 'fabiofz@gmail.com'
-__version__ = '0.1.0'
+from .version import __version__
+
 
 _MUTEX_NAME = 'pydev_code_formatter'
 
@@ -743,7 +742,7 @@ def _connect_to_daemon_process(attempt=0):
         if sys.platform == 'win32':
             kwargs['creationflags'] = DETACHED_PROCESS
         daemon_process = subprocess.Popen(
-            [sys.executable, __file__, '--start-daemon'],
+            [sys.executable, os.path.dirname(__file__), '--start-daemon'],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             stdin=subprocess.PIPE,

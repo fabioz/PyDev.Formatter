@@ -13,16 +13,14 @@ with open('HISTORY.rst') as history_file:
 
 requirements = ['Click>=6.0', ]
 
-setup_requirements = ['pytest-runner', ]
+setup_requirements = [
+    'pytest-runner',
+]
 
-test_requirements = ['pytest', ]
+test_requirements = [
+    'pytest', 
+]
 
-import os
-assert os.path.exists('pydev_formatter.jar')
-assert os.path.exists('pydev_formatter_lib/org.eclipse.equinox.common_3.10.0.v20180412-1130.jar')
-assert os.path.exists('pydev_formatter_lib/org.eclipse.text_3.6.300.v20180430-1330.jar')
-
-data_files = ['pydev_formatter.jar']
 
 setup(
     author="Fabio Zadrozny",
@@ -56,7 +54,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/fabioz/pydevf',
-    version='0.1.0',
+    version='0.1.1',
     zip_safe=False,
-    data_files=data_files,
 )

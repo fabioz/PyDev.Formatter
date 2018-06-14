@@ -7,7 +7,7 @@ PyDev Formatter
         :target: https://pypi.python.org/pypi/pydevf
 
 .. image:: https://img.shields.io/travis/fabioz/pydevf.svg
-        :target: https://travis-ci.org/fabioz/pydevf
+        :target: https://travis-ci.org/fabioz/PyDev.Formatter
 
 .. image:: https://readthedocs.org/projects/pydevf/badge/?version=latest
         :target: https://pydevf.readthedocs.io/en/latest/?badge=latest
@@ -67,6 +67,7 @@ Dealing with big lines
 Note that in PyDev there are tools to help on those manual cases. i.e.:
 
 Wrap docstrings/comments with `Ctrl+2, W` -- See: http://pydev.blogspot.com/2015/04/wrapping-docstringscomments-in-pydev.html.
+
 Wrap/unwrap lists/calls with `Ctrl+1`, `Wrap expression`/`unwrap expression` (used with cursor inside the list/call).
 
 Daemon mode

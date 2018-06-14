@@ -3,7 +3,7 @@ import itertools
 
 
 def test_port_mutex():
-    from pydevf import PortMutex
+    from pydevf._pydevf import PortMutex
     it = itertools.count(0)
 
     def on_create_server():
