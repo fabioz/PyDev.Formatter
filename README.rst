@@ -81,3 +81,10 @@ License
 ==========
 
 * EPL (Eclipse Public License) 2.0
+
+Releasing
+==========
+
+- Update versions on setup.py and version.py
+- python setup.py sdist bdist_wheel
+- python -m twine upload dist/*
