@@ -86,7 +86,7 @@ Releasing
 ==========
 
 - Update versions on setup.py and version.py
-- git tag version
+- git tag version (v0.1.2)
 - git push --tags (travis should build and deploy)
 
 Local release
