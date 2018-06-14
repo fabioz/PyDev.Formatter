@@ -3,6 +3,9 @@ include CONTRIBUTING.rst
 include HISTORY.rst
 include LICENSE
 include README.rst
+include pydevf/pydev_formatter.jar
+include pydevf/pydev_formatter_lib/org.eclipse.equinox.common_3.10.0.v20180412-1130.jar
+include pydevf/pydev_formatter_lib/org.eclipse.text_3.6.300.v20180430-1330.jar
 
 recursive-include tests *
 recursive-exclude * __pycache__
