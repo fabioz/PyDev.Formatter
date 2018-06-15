@@ -63,6 +63,9 @@ def test_format_daemon():
     for i in range(5):
         if i == 3:
             exit_daemon()
+            # Give it some time to finish before starting another one.
+            import time
+            time.sleep(1)
         assert format_code_using_daemon(code1) == code1_expected
 
         with pytest.raises(RuntimeError):

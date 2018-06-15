@@ -137,7 +137,9 @@ def start_daemon_server():
 
 def exit_daemon():
     debug('exit daemon')
-    write_to_stream, _read_from_stream = _connect_to_daemon_process()
+    write_to_stream, _read_from_stream = _connect_to_daemon_process(create_if_not_there=False)
+    if write_to_stream is None:
+        return  # No deamon running
     _write(write_to_stream, 'exit daemon', [('Operation', 'exit_daemon')])
 
 
@@ -720,7 +722,7 @@ def _check_java_in_path():
     _checked_java_in_path = True
 
 
-def _connect_to_daemon_process(attempt=0):
+def _connect_to_daemon_process(attempt=0, create_if_not_there=True):
     debug('connect attempt: %s' % (attempt,))
 
     port_mutex = PortMutex(_MUTEX_NAME, lambda:-1)
@@ -732,6 +734,9 @@ def _connect_to_daemon_process(attempt=0):
         check_java_in_path = False
     else:
         check_java_in_path = True
+        # Was able to acquire mutex (which means there's no server up).
+        if not create_if_not_there:
+            return None, None
 
     # Always release the mutex here as soon as possible because this one
     # is never the 'real' daemon.
