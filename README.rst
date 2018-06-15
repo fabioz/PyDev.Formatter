@@ -6,7 +6,7 @@ PyDev Formatter
 .. image:: https://img.shields.io/pypi/v/pydevf.svg
         :target: https://pypi.python.org/pypi/pydevf
 
-.. image:: https://img.shields.io/travis/fabioz/pydevf.svg
+.. image:: https://img.shields.io/travis/fabioz/PyDev.Formatter.svg
         :target: https://travis-ci.org/fabioz/PyDev.Formatter
 
 

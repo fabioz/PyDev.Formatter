@@ -41,9 +41,6 @@ from .version import __version__
 
 click.disable_unicode_literals_warning = True
 
-
-
-
 _MUTEX_NAME = 'pydev_code_formatter'
 
 if sys.version_info[0] < 3:
@@ -67,6 +64,26 @@ if sys.platform == 'win32':
 else:
     java_executable = 'java'
 
+debug_opts = ['-Xdebug', '-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n']
+debug_opts = []
+
+
+def _create_process(mode):
+    import subprocess
+
+    process = subprocess.Popen(
+        [java_executable] + debug_opts + ['-Xverify:none', '-jar', target_jar, mode],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT
+    )
+    if sys.platform == "win32":
+        # must read streams as binary on windows
+        import msvcrt
+        msvcrt.setmode(process.stdout.fileno(), os.O_BINARY)
+        msvcrt.setmode(process.stdin.fileno(), os.O_BINARY)
+    return process
+
 
 def format_code(code_to_format):
     '''
@@ -76,14 +93,8 @@ def format_code(code_to_format):
         The code to be formatted.
     '''
     _check_java_in_path()
-    import subprocess
+    process = _create_process('-single')
 
-    process = subprocess.Popen(
-        [java_executable, '-Xverify:none', '-jar', target_jar, '-single'],
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT
-    )
     input_in_bytes = isinstance(code_to_format, bytes)
 
     if not input_in_bytes:
@@ -172,14 +183,8 @@ def start_format_server():
     (uses the process stdin/stdout to communicate with it).
     '''
     _check_java_in_path()
-    import subprocess
+    process = _create_process('-multiple')
 
-    process = subprocess.Popen(
-        [java_executable, '-Xverify:none', '-jar', target_jar, '-multiple'],
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT
-    )
     return process
 
 
@@ -535,7 +540,6 @@ def debug_exception(msg=None):
             debug(msg)
 
         with _debug_lock:
-            import traceback
             with open(DEBUG_FILE, 'a+') as stream:
                 _pid_prefix = _pid_msg
                 if isinstance(msg, bytes):
@@ -661,7 +665,6 @@ def _start_handling(process, socket, port_mutex):
                     else:
                         from io import StringIO
                         s = StringIO()
-                    import traceback
                     traceback.print_exc(file=s)
                     v = s.getvalue()
                     if isinstance(v, bytes):
