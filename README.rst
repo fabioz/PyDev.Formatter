@@ -56,7 +56,19 @@ Install with pip
 
 To install the PyDev Formatter use:
 
-``pip install pydevf`` 
+``pip install pydevf``
+
+Using with pre-commit
+---------------------
+
+To use it with `pre-commit`_, just add the following repo to your ``.pre-commit-config.yaml``::
+
+    -   repo: https://github.com/fabioz/PyDev.Formatter
+        rev: ''  # Use the sha or tag you want to point at
+        hooks:
+        -   id: pydevf
+
+.. _pre-commit: https://pre-commit.com/
 
 Dealing with big lines
 ========================
