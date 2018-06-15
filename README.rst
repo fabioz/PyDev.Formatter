@@ -9,11 +9,6 @@ PyDev Formatter
 .. image:: https://img.shields.io/travis/fabioz/pydevf.svg
         :target: https://travis-ci.org/fabioz/PyDev.Formatter
 
-.. image:: https://readthedocs.org/projects/pydevf/badge/?version=latest
-        :target: https://pydevf.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
-
-
 
 Features
 ==========
@@ -35,16 +30,16 @@ common issues such as:
 - Add new line at end of file
 - Format comments to have 2 spaces before a comment and 1 space inside the comment
 
-And will not try to break statements to fit any pre-specified line length (as gofmt).
+Note that it does not try to break statements to fit any pre-specified line length (as gofmt).
 
 Command line
 =============
 
-To use the formatter use:
+Basic use of the formatter is:
  
-`python -m pydevf <filename_or_directory>`
+``python -m pydevf <filename_or_directory>``
 
-`python -m pydevf -h` may be used to see the help for additional parameters.
+``python -m pydevf -h`` may be used to see the help for additional parameters.
 
 Installing
 ============
@@ -59,23 +54,25 @@ Requisites
 Install with pip
 -----------------
 
-`pip install pydevf` should be used to install the PyDev Formatter.
+To install the PyDev Formatter use:
+
+``pip install pydevf`` 
 
 Dealing with big lines
 ========================
 
 Note that in PyDev there are tools to help on those manual cases. i.e.:
 
-Wrap docstrings/comments with `Ctrl+2, W` -- See: http://pydev.blogspot.com/2015/04/wrapping-docstringscomments-in-pydev.html.
+Wrap docstrings/comments with ``Ctrl+2, W`` -- See: http://pydev.blogspot.com/2015/04/wrapping-docstringscomments-in-pydev.html.
 
-Wrap/unwrap lists/calls with `Ctrl+1`, `Wrap expression`/`unwrap expression` (used with cursor inside the list/call).
+Wrap/unwrap lists/calls with ``Ctrl+1``, ``Wrap expression``/``Unwrap expression`` (used with cursor inside the list/call).
 
 Daemon mode
 ============
 
 By default the formatter will create a daemon and will reuse it among multiple invocations (because
 the formatter is **very fast** but its startup is slow). If you don't want to use this mode use
-the `--no-daemon` parameter. 
+the ``--no-daemon`` parameter. 
 
 License
 ==========
@@ -85,13 +82,13 @@ License
 Releasing
 ==========
 
-- Update versions on setup.py and version.py
-- git tag version (v0.1.2)
-- git push --tags (travis should build and deploy)
+- Update versions on ``setup.py`` and ``version.py``
+- ``git tag {{version}}`` (i.e.: v0.1.2)
+- ``git push --tags`` (travis should build and deploy)
 
 Local release
-===============
+---------------
 
-- Update versions on setup.py and version.py
-- python setup.py sdist bdist_wheel
-- python -m twine upload dist/*
+- Update versions on ``setup.py`` and ``version.py``
+- ``python setup.py sdist bdist_wheel``
+- ``python -m twine upload dist/*``
