@@ -1,6 +1,6 @@
 -   id: pydevf
     name: PyDev Formatter
     description: PyDev Code Formatter    
-    entry: pydevf --no-daemon
+    entry: pydevf
     language: python
     files: \.(py|pyw)$
